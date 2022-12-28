@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { savePontuation } from '../redux/actions';
+import { Box, Button, Container, Paper, Typography } from '@mui/material';
 
 const ONE_SECOND = 1000;
 const TEN = 10;
@@ -145,25 +146,43 @@ class Perguntas extends React.Component {
       loading,
     } = this.state;
     return (
-      <main className="perguntas-container">
+      <Container
+        sx={{
+          marginTop: 15,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          // backgroundColor: "green"
+        }}
+      >
         { loading ? (
-          <div className="perguntas-respostas-container">
-            <div className="perguntas">
-              <div className="timer">
-                <h2>Timer: </h2>
-                <h1>{timer}</h1>
-              </div>
-              <div className="perguntas-container">
-                <h1>Question</h1>
-                <h3 data-testid="question-category">{questions[index].category}</h3>
-                <h3 data-testid="question-text">{questions[index].question}</h3>
-              </div>
-            </div>
-            <div data-testid="answer-options" className="answer-options">
+          <Paper 
+          sx={{
+            // minWidth: "80%",
+            // maxWidth: "90%",
+            display: "flex",
+            justifyContent: "center",
+            // alignItems: "center"
+            // backgroundColor: "red"
+          }}
+          className="perguntas-respostas-container">
+            <Box className="perguntas">
+              <Box className="timer">
+                <Typography>Timer: </Typography>
+                <Typography>{timer}</Typography>
+              </Box>
+              <Box className="perguntas-container">
+                <Typography>Question</Typography>
+                <Typography data-testid="question-category">{questions[index].category}</Typography>
+                <Typography data-testid="question-text">{questions[index].question}</Typography>
+              </Box>
+            </Box>
+            <Box data-testid="answer-options" className="answer-options">
               {arrayRandom.map((element, indice) => (
                 element === questions[index]
                   .correct_answer ? (
-                    <button
+                    <Button
+                      variant="contained"
                       disabled={ disabled }
                       onClick={ (event) => this
                         .handleClick(event, questions[index].difficulty) }
@@ -175,10 +194,11 @@ class Perguntas extends React.Component {
                     >
                       {element}
 
-                    </button>)
+                    </Button>)
                   : (
-                    <button
+                    <Button
                       disabled={ disabled }
+                      variant="contained"
                       id="wrongAnswer"
                       className={ wrongAnswer }
                       data-testid={ `wrong-answer-${indice}` }
@@ -187,29 +207,29 @@ class Perguntas extends React.Component {
                       onClick={ this.handleClick }
                     >
                       {element}
-                    </button>
+                    </Button>
                   )))}
-            </div>
+            </Box> 
+                    {nextBtn && (
+                      <Box className="btn-next">
+                        <Button
+                          name="next"
+                          variant="contained"
+                          type="button"
+                          data-testid="btn-next"
+                          onClick={ this.handleClickTwo }
+                        >
+                          Next
+            
+                        </Button>
+                      </Box>
+                    )}
 
-          </div>
+          </Paper>
         ) : (
-          <p>Carregando Pergunta..</p>
+          <Typography>Carregando Pergunta..</Typography>
         )}
-
-        {nextBtn && (
-          <div className="btn-next">
-            <button
-              name="next"
-              type="button"
-              data-testid="btn-next"
-              onClick={ this.handleClickTwo }
-            >
-              Next
-
-            </button>
-          </div>
-        )}
-      </main>
+      </Container>
     );
   }
 }

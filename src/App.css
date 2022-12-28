@@ -42,7 +42,7 @@ body {
 
 .rightAnswer {
   animation: blinker 1.5s linear infinite;
-  box-shadow: 2px 2px 5px 10px yellow;
+  /* box-shadow: 2px 2px 5px 10px yellow; */
 }
 
 @keyframes blinker {

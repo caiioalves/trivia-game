@@ -3,6 +3,7 @@ import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { saveHash } from '../redux/actions';
+import { AppBar, Avatar, Box, Typography } from '@mui/material';
 
 class Header extends React.Component {
     state = {
@@ -23,22 +24,31 @@ class Header extends React.Component {
     console.log(score);
     const { url } = this.state;
     return (
-      <header>
-        <div className="picture-name-content">
-          <img
+      <AppBar
+        color="appBar"
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          padding: "1%",
+          alignItems: "center",
+        }}
+      >
+        <Box ml={1} display="flex" gap={3} flexDirection="row" alignItems="center" className="picture-name-content">
+          <Avatar
             className="picture"
             src={ url }
             alt="imagem de Perfil"
             data-testid="header-profile-picture"
           />
-          <h3 data-testid="header-player-name">{ nome }</h3>
-        </div>
-        <h3 className="score" data-testid="header-score">
+          <Typography data-testid="header-player-name">{ nome }</Typography>
+        </Box>
+        <Typography mr={1} className="score" data-testid="header-score">
 
           {`Score: ${score}`}
 
-        </h3>
-      </header>
+        </Typography>
+      </AppBar>
     );
   }
 }

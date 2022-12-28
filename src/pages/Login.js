@@ -6,6 +6,12 @@ import addUser, { fetchApiThunk } from '../redux/actions';
 import { Box, Button, Paper, Stack, TextField, Typography } from '@mui/material';
 // import { useNavigate  } from 'react-router-dom';
 
+// const Image = styled("img")({
+//   width: "150px",
+//   mb: 5,
+// })
+
+
 class Login extends React.Component {
   state = {
     name: '',
@@ -54,14 +60,17 @@ class Login extends React.Component {
           className="login-content"
         >
           <Paper
-            elevation={3}
+            elevation={5}
             className="container-login"
             sx={{
+              backgroundColor: "#f3f5f4",
               padding: "5%",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              borderRadius: "5%"
+              borderRadius: "5%",
+              minWidth: "30%",
+              // maxWidth: "90%"
             }}
           >
             <Typography
@@ -69,10 +78,15 @@ class Login extends React.Component {
               variant="h5"
               color="primary"
               fontWeight="bold"
-              sx={{ textDecoration: "underline", mb: 6 }}
+              sx={{ textDecoration: "underline", mb: 7 }}
             >
-          Sign-In
-        </Typography>
+              Entrar
+            </Typography>
+        {/* <Box sx={{
+          mb: 5
+        }} > 
+        <Image src={imagem} alt=""/>
+        </Box> */}
             {/* <img alt="trivia" src={ imagem } className="img" /> */}
             <Box
               sx={{
@@ -82,7 +96,8 @@ class Login extends React.Component {
                 alignItems: "center",
               }}
             >
-              <TextField 
+              <TextField
+                // fullWidth
                 sx={{ mb: 2, width: "100%"}}
                 name="name"
                 label="Nome"
@@ -90,6 +105,7 @@ class Login extends React.Component {
                 onChange={ this.handleChange }
               />
               <TextField
+                fullWidth
                 name="email"
                 label="Email"
                 data-testid="input-gravatar-email"
@@ -99,6 +115,7 @@ class Login extends React.Component {
             </Box>
             <Box display="flex" flexDirection="column">
             <Button
+              color='secondary'
               sx={{mt: 4, mb: 2}}
               variant="contained"
               onClick={ this.handleClick }
