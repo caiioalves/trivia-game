@@ -7,7 +7,7 @@ export const Tema = createTheme({
         main: "#F25270",
     },
     secondary: {
-      main: "#74DB04",
+      main: "#2BF08D",
       contrastText: "#FAFAFA",
     },
     appBar: {

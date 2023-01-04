@@ -25,7 +25,7 @@ class Header extends React.Component {
     const { url } = this.state;
     return (
       <AppBar
-        color="appBar"
+        // color="appBar"
         sx={{
           display: "flex",
           flexDirection: "row",
