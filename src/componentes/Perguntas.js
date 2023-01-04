@@ -160,7 +160,7 @@ class Perguntas extends React.Component {
       <Container
         sx={{
           height: '100vh',
-          // marginTop: 15,
+          marginTop: 5,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -175,7 +175,7 @@ class Perguntas extends React.Component {
             borderRadius: 3,
             minWidth: "60%",
             // maxWidth: "90%",
-            maxHeight: "80vh",
+            maxHeight: "1000vh",
             padding: 3,
             display: "flex",
             flexDirection: "column",
@@ -190,7 +190,7 @@ class Perguntas extends React.Component {
                 {/* <Typography>{timer}</Typography> */}
               </Box>
               <Box display="flex" flexDirection="column" className="perguntas-container">
-                <Typography fontWeight="bold" alignSelf="center" color='#217ed5' mb={5} variant='h4'>Question</Typography>
+                <Typography fontWeight="bold" alignSelf="center" color='#217ed5' mb={2} variant='h4'>Question</Typography>
                 <Typography fontWeight="bold" textAlign="center" alignSelf="center" mb={1} variant='h5' data-testid="question-category">{questions[index].category}</Typography>
                 <Typography fontWeight="bold" textAlign="center" alignSelf="center" variant='h6' data-testid="question-text">{questions[index].question}</Typography>
                 {console.log(questions[index].question)}
