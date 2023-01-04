@@ -1,6 +1,7 @@
 // ordernação de objetos no array https://www.javascripttutorial.net/array/javascript-sort-an-array-of-objects/
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Avatar, Box, Button, List, ListItem, Paper, Typography } from '@mui/material';
 
 class Ranking extends React.Component {
   state = {
@@ -21,29 +22,70 @@ class Ranking extends React.Component {
   render() {
     const { arrayRank } = this.state;
     return (
-      <div className="ranking-container">
-        <h1 data-testid="ranking-title">Ranking</h1>
-        <ol>
+      <Box height="100vh" display="flex" alignItems="center" justifyContent="center" className="ranking-container">
+        <Paper
+          elevation={5}
+          sx={{
+            padding: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minWidth: '50%',
+            maxWidth: '95%',
+            borderRadius: 4
+          }}
+        >
+        <Typography fontWeight="bold" variant='h3' data-testid="ranking-title">Ranking</Typography>
+        <List
+          sx={{
+            width:'100%',
+          }}
+        >
           { arrayRank.map((player, index) => (
-            <li key={ index }>
-              <div className="picture-name-content">
-                <img alt="account icon" className="picture" src={ player.hash } />
-                <p data-testid={ `player-name-${index}` }>{ player.name }</p>
-                <p data-testid={ `player-score-${index}` }>
-                  { `your score is ${player.score}` }
-                </p>
-              </div>
-            </li>
+            <ListItem
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignContent: 'center',
+
+              }}
+              key={ index }>
+              <Box
+                justifyContent="space-between"
+                width="100%"
+                display="flex"
+                flexDirection="column"
+                gap={1}
+                alignItems="center"
+                bgcolor='#F25270'
+                color='white'
+                borderRadius={3}
+                padding={2}
+                className="picture-name-content"
+              >
+                <Box display="flex" alignItems="center" gap={1}>
+                <Avatar alt="account icon" className="picture" src={ player.hash } />
+                <Typography fontWeight="bold" variant="h5" data-testid={ `player-name-${index}` }>{ player.name }</Typography>
+                </Box>
+                <Typography variant="h6" data-testid={ `player-score-${index}` }>
+                  { `Your score is ${player.score}` }
+                </Typography>
+              </Box>
+            </ListItem>
           )) }
-        </ol>
-        <button
+        </List>
+        <Button
+          sx={{fontWeight: "bold"}}
+          variant='contained'
           data-testid="btn-go-home"
-          type="button"
+          color='secondary'
           onClick={ this.handleClick }
         >
           Voltar ao inicio
-        </button>
-      </div>
+        </Button>
+        </Paper>
+      </Box>
     );
   }
 }

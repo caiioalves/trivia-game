@@ -116,7 +116,7 @@ class Login extends React.Component {
             <Box display="flex" flexDirection="column">
             <Button
               color='secondary'
-              sx={{mt: 4, mb: 2}}
+              sx={{mt: 4, mb: 2, fontWeight: "bold"}}
               variant="contained"
               onClick={ this.handleClick }
               data-testid="btn-play"

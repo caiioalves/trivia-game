@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { savePontuation } from '../redux/actions';
 import { Box, Button, Container, Paper, Typography } from '@mui/material';
+// import SvgIcon from '@mui/material/SvgIcon':
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 const ONE_SECOND = 1000;
 const TEN = 10;
@@ -22,6 +24,8 @@ class Perguntas extends React.Component {
     loading: false,
     rightAnswer: 'perguntas',
     wrongAnswer: 'perguntas',
+    colorRight: '#A4A6A6',
+    colorWrong: '#A4A6A6'
   }
 
   getRandomAnswerAndQuestions = async () => {
@@ -51,7 +55,7 @@ class Perguntas extends React.Component {
 
   timer = () => {
     this.intervalId = setInterval(() => {
-      console.log('setando o state dentro do setInterval');
+      // console.log('setando o state dentro do setInterval');
       this.setState((prevState) => ({ timer: prevState.timer - 1 }));
     }, ONE_SECOND);
   }
@@ -70,6 +74,7 @@ class Perguntas extends React.Component {
 
   componentDidUpdate = () => {
     const { timer, disabled } = this.state;
+    // console.log(this.state.questions);
     if (timer === 0 && disabled === false) {
       clearInterval(this.intervalId);
       this.changeState();
@@ -102,6 +107,10 @@ class Perguntas extends React.Component {
 
   handleClickTwo = () => {
     const { index } = this.state;
+
+    this.setState({ colorRight: '#A4A6A6' })
+    this.setState({ colorWrong: '#A4A6A6' })
+
     if (index === FOUR) {
       const { history, score, name, hash } = this.props;
       console.log('deu certo');
@@ -144,11 +153,14 @@ class Perguntas extends React.Component {
       arrayRandom,
       nextBtn,
       loading,
+      colorRight,
+      colorWrong
     } = this.state;
     return (
       <Container
         sx={{
-          marginTop: 15,
+          height: '100vh',
+          // marginTop: 15,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -156,41 +168,63 @@ class Perguntas extends React.Component {
         }}
       >
         { loading ? (
-          <Paper 
+          <Paper
+          elevation={5}
           sx={{
-            // minWidth: "80%",
+            marginTop: 2,
+            borderRadius: 3,
+            minWidth: "60%",
             // maxWidth: "90%",
+            maxHeight: "80vh",
+            padding: 3,
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             // alignItems: "center"
             // backgroundColor: "red"
           }}
           className="perguntas-respostas-container">
-            <Box className="perguntas">
-              <Box className="timer">
-                <Typography>Timer: </Typography>
-                <Typography>{timer}</Typography>
+            <Box display="flex" flexDirection="column" className="perguntas">
+              <Box mb={1} className="timer">
+                <Typography variant='h5'>Timer: {timer}</Typography>
+                {/* <Typography>{timer}</Typography> */}
               </Box>
-              <Box className="perguntas-container">
-                <Typography>Question</Typography>
-                <Typography data-testid="question-category">{questions[index].category}</Typography>
-                <Typography data-testid="question-text">{questions[index].question}</Typography>
+              <Box display="flex" flexDirection="column" className="perguntas-container">
+                <Typography fontWeight="bold" alignSelf="center" color='#217ed5' mb={5} variant='h4'>Question</Typography>
+                <Typography fontWeight="bold" textAlign="center" alignSelf="center" mb={1} variant='h5' data-testid="question-category">{questions[index].category}</Typography>
+                <Typography fontWeight="bold" textAlign="center" alignSelf="center" variant='h6' data-testid="question-text">{questions[index].question}</Typography>
+                {console.log(questions[index].question)}
               </Box>
             </Box>
-            <Box data-testid="answer-options" className="answer-options">
+            <Box
+              mt={2}
+              gap={1}
+              data-testid="answer-options"
+              className="answer-options"
+              alignSelf="center"
+              display="flex"
+              flexDirection="column"
+              width='60%'
+              justifyContent="center"
+            >
               {arrayRandom.map((element, indice) => (
                 element === questions[index]
                   .correct_answer ? (
                     <Button
+                      fullWidth
                       variant="contained"
                       disabled={ disabled }
-                      onClick={ (event) => this
-                        .handleClick(event, questions[index].difficulty) }
+                      onClick={ (event) => {
+                        this.handleClick(event, questions[index].difficulty)
+                        this.setState({ colorRight: '#2BF08D' })
+                        this.setState({ colorWrong: '#F25270' })
+                        console.log('teste');
+                      }}
                       id="rightAnswer"
                       className={ rightAnswer }
                       key={ indice }
                       data-testid="correct-answer"
-                      type="button"
+                      sx={{bgcolor: colorRight, fontWeight: "bold"}}
                     >
                       {element}
 
@@ -199,32 +233,38 @@ class Perguntas extends React.Component {
                     <Button
                       disabled={ disabled }
                       variant="contained"
+                      data-testid={ `wrong-answer-${indice}` }
+                      // type="button"
+                      key={ indice }
+                      onClick={(event) => {
+                        this.handleClick(event)
+                        this.setState({ colorRight: '#2BF08D' })
+                        this.setState({ colorWrong: '#F25270' })
+                      }
+                      }
                       id="wrongAnswer"
                       className={ wrongAnswer }
-                      data-testid={ `wrong-answer-${indice}` }
-                      type="button"
-                      key={ indice }
-                      onClick={ this.handleClick }
+                      sx={{bgcolor: colorWrong, fontWeight: "bold"}}
                     >
                       {element}
                     </Button>
                   )))}
-            </Box> 
                     {nextBtn && (
-                      <Box className="btn-next">
+                      <Box mt={2} alignSelf="center" className="btn-next">
                         <Button
+                          color='secondary'
                           name="next"
                           variant="contained"
                           type="button"
                           data-testid="btn-next"
                           onClick={ this.handleClickTwo }
                         >
-                          Next
-            
+                          {/* Next */}
+                          <ArrowRightAltIcon sx={{ fontSize: 30 }}/>            
                         </Button>
                       </Box>
                     )}
-
+              </Box> 
           </Paper>
         ) : (
           <Typography>Carregando Pergunta..</Typography>
