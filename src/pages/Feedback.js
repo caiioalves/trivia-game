@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../componentes/Header';
 import { savePontuation } from '../redux/actions';
-import { Box, Button, Container, Paper, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 
 const THREE = 3;
 
