@@ -159,8 +159,8 @@ class Perguntas extends React.Component {
     return (
       <Container
         sx={{
-          height: '100vh',
-          marginTop: 5,
+          height: '100%',
+          marginTop: 15,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

@@ -22,21 +22,25 @@ class Ranking extends React.Component {
   render() {
     const { arrayRank } = this.state;
     return (
-      <Box height="100vh" display="flex" alignItems="center" justifyContent="center" className="ranking-container">
+      <Box height="100%" display="flex" alignItems="center" justifyContent="center" className="ranking-container">
         <Paper
           elevation={5}
           sx={{
+            mt: 5,
+            mb: 5,
+            // minHeight: '30%',
+            // height: "70%",
             padding: 3,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             minWidth: '50%',
-            maxWidth: '95%',
+            maxWidth: '90%',
             borderRadius: 4
           }}
         >
-        <Typography fontWeight="bold" variant='h3' data-testid="ranking-title">Ranking</Typography>
+        <Typography color="#217ed5" fontWeight="bold" variant='h3' data-testid="ranking-title">Ranking</Typography>
         <List
           sx={{
             width:'100%',
@@ -61,7 +65,7 @@ class Ranking extends React.Component {
                 bgcolor='#F25270'
                 color='white'
                 borderRadius={3}
-                padding={2}
+                padding={1}
                 className="picture-name-content"
               >
                 <Box display="flex" alignItems="center" gap={1}>

@@ -12,6 +12,7 @@ body {
 
 body {
   background-image: url('./gif-1.gif');
+  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -22,7 +23,7 @@ body {
   padding: 0;
 }
 
-.respostas {
+/* .respostas {
   background: gray;
 }
 
@@ -38,11 +39,11 @@ body {
 .rightAnswer {
   background-color: rgb(6, 240, 15);
   border: 3px solid rgb(6, 240, 15);
-}
+} */
 
 .rightAnswer {
   animation: blinker 1.5s linear infinite;
-  /* box-shadow: 2px 2px 5px 10px yellow; */
+  box-shadow: 2px 2px 5px 10px yellow;
 }
 
 @keyframes blinker {
@@ -51,7 +52,7 @@ body {
   }
 }
 
-.wrongAnswer {
+/* .wrongAnswer {
   background-color: red;
   border: 3px solid red;
-}
+} */
